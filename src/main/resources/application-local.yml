@@ -1,0 +1,25 @@
+zipkin:
+  storage:
+    elasticsearch:
+      cluster: elasticsearch-zipkin-cluster
+      max-requests: 64
+      index-replicas: 1
+      hosts: 192.168.19.7:9200
+      index: zipkin
+      index-shards: 5
+    StorageComponent: elasticsearch
+    type: elasticsearch
+  collector:
+    rabbitmq:
+      addresses: 192.168.19.7:5672
+      password: guest
+      username: guest
+      queue: zipkin
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipaddress}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://${register-visite-name}:${register-visite-passwd}@localhost:${register.port}/eureka/
+    registry-fetch-interval-seconds: 3  #获取服务的刷新时间

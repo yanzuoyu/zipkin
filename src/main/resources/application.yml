@@ -1,0 +1,37 @@
+spring:
+  sleuth:
+    enabled: false
+  application:
+    name: zipkin-server
+  security:  #密码认证
+    basic:
+      enabled: true
+    user:
+      name: sleuth-zipkin
+      password: 123456
+  profiles:
+    active: local
+
+server:
+  port: 10000
+
+register:
+  port: 10000
+
+#访问服务注册中心管理页面需要加密码
+register-visite-name: eureka
+register-visite-passwd: 123456
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
